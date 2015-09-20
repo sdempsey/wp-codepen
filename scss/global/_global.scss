@@ -1,0 +1,68 @@
+@import "mixins";
+@import "reset";
+@import "core";
+
+//colors
+
+$colors: (
+
+);
+
+@function color($key) {
+	@if map-has-key($colors, $key) {
+		@return map-get($colors, $key);
+	}
+
+	@warn "Unkown '#{$key}' in $colors.";
+	@return null;
+}
+
+//Breakpoints Map and Mixin
+
+$small: em(600px);      // 37.5em  
+$medium: em(760px);     // 47.5em
+$large: em(1000px);     // 62.5em
+
+$breakpoints: (
+	small: $small,
+	medium: $medium,
+	large: $large,
+);
+
+@mixin respond-to($breakpoint) {
+	@if map-has-key($breakpoints, $breakpoint) {
+		@media screen and (min-width: #{map-get($breakpoints, $breakpoint)}) {
+			@content;
+		}
+	}
+	@else {
+		@warn "That variable doesn't exist in '#{$breakpoint}' dummy"
+		+ "Add it to '$breakpoints' map, or GTFO.";
+	}
+}
+
+//Z index Map and Mixin
+
+$z-index: (
+	botomless-pit: -99999,
+	mount-everest: 99999
+);
+
+@function z($key) {
+	@if map-has-key($z-index, $key) {
+		@return map-get($z-index, $key);
+	}
+
+	@warn "Unkown '#{$key}' in $z-index.";
+	@return null;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}

@@ -1,0 +1,6 @@
+# Include your project-specific ignores in this file
+
+node_modules
+*~
+.DS_Store
+cgi-bin
